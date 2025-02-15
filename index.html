@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Schedule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .quote-container {
+            background: #161616;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .quote-text {
+            color: #00ffcc;
+            font-size: 1.2em;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .quote-author {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .schedule {
+            display: grid;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .day-card {
+            background: #161616;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #2a2a2a;
+            transition: all 0.4s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .day-header {
+            color: #00ffcc;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-progress {
+            font-size: 0.5em;
+            color: #888;
+        }
+
+        .class-item {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: #1a1a1a;
+            transition: all 0.3s ease;
+            border: 1px solid #2a2a2a;
+        }
+
+        .class-item:hover {
+            transform: translateX(5px);
+            background: #202020;
+        }
+
+        .class-name {
+            color: #ffffff;
+            font-weight: 400;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .class-time {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .task-checkbox {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #00ccff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .task-checkbox:checked {
+            background-color: #00ccff;
+            border-color: #00ccff;
+        }
+
+        @media (max-width: 768px) {
+            .schedule {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quote-container">
+            <div class="quote-text">"Education is not preparation for life; education is life itself."</div>
+            <div class="quote-author">- John Dewey</div>
+        </div>
+
+        <div class="schedule">
+            <div class="day-card">
+                <div class="day-header">
+                    Monday
+                    <span class="day-progress" id="monday-progress">0/3</span>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Consumer Behavior
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">8:00 → 9:15</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Math for Business
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">9:30 → 10:45</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Management Information System
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">2:00 → 3:15</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    Tuesday
+                    <span class="day-progress" id="tuesday-progress">0/3</span>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Digital Marketing
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">8:00 → 9:15</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Composition and Rhetoric II
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">11:00 → 12:15</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Introduction to Macroeconomics
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">12:30 → 1:45</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    Wednesday
+                    <span class="day-progress" id="wednesday-progress">0/3</span>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Consumer Behavior
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">8:00 → 9:15</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Math for Business
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">9:30 → 10:45</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Management Information System
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">2:00 → 3:15</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    Thursday
+                    <span class="day-progress" id="thursday-progress">0/3</span>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Digital Marketing
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">8:00 → 9:15</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Composition and Rhetoric II
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">11:00 → 12:15</div>
+                </div>
+                <div class="class-item">
+                    <div class="class-name">
+                        Introduction to Macroeconomics
+                        <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    </div>
+                    <div class="class-time">12:30 → 1:45</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const days = ['monday', 'tuesday', 'wednesday', 'thursday'];
+            days.forEach(day => {
+                const checkboxes = document.querySelectorAll(`#${day}-progress`).length;
+                const checked = document.querySelectorAll(`#${day}-progress .task-checkbox:checked`).length;
+                document.getElementById(`${day}-progress`).textContent = `${checked}/3`;
+            });
+        }
+
+        // Initialize progress
+        updateProgress();
+    </script>
+</body>
+</html>
